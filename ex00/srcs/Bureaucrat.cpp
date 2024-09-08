@@ -6,7 +6,7 @@
 /*   By: dbarrene <dbarrene@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 00:04:36 by dbarrene          #+#    #+#             */
-/*   Updated: 2024/09/08 13:24:58 by dbarrene         ###   ########.fr       */
+/*   Updated: 2024/09/08 16:00:22 by dbarrene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ Bureaucrat::Bureaucrat(const std::string &name, int32_t grade) : m_name(name)
 		throw GradeTooLowException();
 	if (grade < 1)
 		throw GradeTooHighException();
+	m_grade = grade;
 };
 
 Bureaucrat::Bureaucrat(const Bureaucrat& other): m_name(other.m_name), m_grade(other.m_grade)
