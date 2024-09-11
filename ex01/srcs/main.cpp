@@ -6,7 +6,7 @@
 /*   By: dbarrene <dbarrene@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 23:53:45 by dbarrene          #+#    #+#             */
-/*   Updated: 2024/09/08 17:42:07 by dbarrene         ###   ########.fr       */
+/*   Updated: 2024/09/11 14:27:34 by dbarrene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	main(void)
 		Form testcase;
 		std::cout << testcase << std::endl;
 		Bureaucrat worker("loser", 69);
-
-		testcase.beSigned(worker);}
+		testcase.beSigned(worker);
+	}
 	catch(std::exception &e)
 	{
 		std::cout << "Exception caught: " << e.what() << std::endl;

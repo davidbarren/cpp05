@@ -6,12 +6,12 @@
 /*   By: dbarrene <dbarrene@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 00:04:36 by dbarrene          #+#    #+#             */
-/*   Updated: 2024/09/09 13:32:27 by dbarrene         ###   ########.fr       */
+/*   Updated: 2024/09/08 17:56:44 by dbarrene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 std::ostream& operator<<(std::ostream& str, Bureaucrat& ref)
 {
@@ -83,12 +83,13 @@ const char* Bureaucrat::GradeTooHighException::what() const noexcept
 	return "This grade is too high!";
 }
 
-void	Bureaucrat::signForm(Form &form)
+void	Bureaucrat::signForm(AForm &form)
 {
-	if (m_grade <= form.getSignReq())
-		std::cout << m_name << " signed " << form.getName() << std::endl;
-	else 
+	if (!form.getSignage())
+	{
 		std::cout << m_name << " couldn't sign " << form.getName()
 			<< " because of a skill issue (grade too low)." << std::endl;
-	form.beSigned(*this);
+	}
+	else
+		std::cout << m_name << " signed " << form.getName() << std::endl;
 }

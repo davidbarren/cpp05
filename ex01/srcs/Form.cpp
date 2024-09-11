@@ -6,7 +6,7 @@
 /*   By: dbarrene <dbarrene@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 16:42:27 by dbarrene          #+#    #+#             */
-/*   Updated: 2024/09/08 17:17:24 by dbarrene         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:31:06 by dbarrene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,9 @@ int32_t Form::getExecReq() const
 
 void	Form::beSigned(Bureaucrat signer)
 {
-	if (signer.getGrade() < m_sign_req)
+	if (signer.getGrade() <= m_sign_req)
 		m_is_signed = true;
-	signer.signForm(*this);
-	if (!m_is_signed)
+	else
 		throw GradeTooLowException();
 
 }

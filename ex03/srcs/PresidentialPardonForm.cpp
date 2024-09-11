@@ -1,49 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
+/*   PresidentialPardonForm.cpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbarrene <dbarrene@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 18:05:49 by dbarrene          #+#    #+#             */
-/*   Updated: 2024/09/11 14:42:37 by dbarrene         ###   ########.fr       */
+/*   Updated: 2024/09/08 19:36:43 by dbarrene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ShrubberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target): AForm("ShrubberyCreationForm", 145, 137)
+PresidentialPardonForm::PresidentialPardonForm(std::string target): AForm("PresidentialPardonForm", 25, 5)
 {
 	m_target = target;
 }
 
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other)
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other)
 {
 	m_target = other.m_target;
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm(){
+PresidentialPardonForm::~PresidentialPardonForm(){
 }
 
-void	ShrubberyCreationForm::execute(Bureaucrat const& executor) const
+void	PresidentialPardonForm::execute(Bureaucrat const& executor) const
 {
-	std::string tree;
-	std::ofstream strm;
-
-	tree = "  *  \n *** \n*****\n  |  \n";
 	if (checkPrivs(executor))
-	{
-		strm.open(m_target + "_shrubbery");
-		if (strm.is_open())
-		{
-			strm << tree;
-			strm.close();
-		}
-	}
+		std:: cout<< m_target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
 }
 
-ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other)
+PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& other)
 {
 	m_target = other.m_target;
 	return *this;

@@ -1,49 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
+/*   RobotomyRequestForm.cpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbarrene <dbarrene@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 18:05:49 by dbarrene          #+#    #+#             */
-/*   Updated: 2024/09/11 14:42:37 by dbarrene         ###   ########.fr       */
+/*   Updated: 2024/09/08 19:40:28 by dbarrene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target): AForm("ShrubberyCreationForm", 145, 137)
+RobotomyRequestForm::RobotomyRequestForm(std::string target): AForm("RobotomyRequestForm", 72, 45)
 {
 	m_target = target;
 }
 
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other)
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other)
 {
 	m_target = other.m_target;
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm(){
+RobotomyRequestForm::~RobotomyRequestForm(){
 }
 
-void	ShrubberyCreationForm::execute(Bureaucrat const& executor) const
+void	RobotomyRequestForm::execute(Bureaucrat const& executor) const
 {
-	std::string tree;
-	std::ofstream strm;
-
-	tree = "  *  \n *** \n*****\n  |  \n";
+	static int i = 0;
 	if (checkPrivs(executor))
 	{
-		strm.open(m_target + "_shrubbery");
-		if (strm.is_open())
-		{
-			strm << tree;
-			strm.close();
-		}
+		std:: cout << "*drilling noises*" << std::endl;
+		if (i % 2)
+			std::cout << m_target << " has been robotomized" << std::endl;
+		else
+			std::cout << m_target << "'s robotomy has failed :( " << std::endl;
 	}
 }
 
-ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other)
+RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& other)
 {
 	m_target = other.m_target;
 	return *this;
