@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbarrene <dbarrene@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 16:32:54 by dbarrene          #+#    #+#             */
-/*   Updated: 2024/09/08 16:45:09 by dbarrene         ###   ########.fr       */
+/*   Updated: 2024/09/19 13:49:03 by dbarrene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,22 @@ class Form
 		Form(std::string name, int32_t signreq, int32_t execreq);
 		Form(const Form& other);
 		Form& operator=(const Form& other);
-		~Form();
+		virtual ~Form();
 		const std::string getName() const;
 		bool			getSignage() const;
 		int32_t	getSignReq() const;
 		int32_t getExecReq() const;
 		void	beSigned(Bureaucrat signer);
+		bool	checkSignPrivs(Bureaucrat const &executor) const;
 		class GradeTooHighException : public std::exception
 		{
 		const char* what() const noexcept;
 		};
 		class GradeTooLowException : public std::exception
+		{
+		const char* what() const noexcept;
+		};
+		class FormNotSignedException : public std::exception
 		{
 		const char* what() const noexcept;
 		};

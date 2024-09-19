@@ -6,7 +6,7 @@
 /*   By: dbarrene <dbarrene@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 00:04:36 by dbarrene          #+#    #+#             */
-/*   Updated: 2024/09/09 13:32:27 by dbarrene         ###   ########.fr       */
+/*   Updated: 2024/09/19 13:52:01 by dbarrene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,16 @@ const char* Bureaucrat::GradeTooHighException::what() const noexcept
 
 void	Bureaucrat::signForm(Form &form)
 {
-	if (m_grade <= form.getSignReq())
+	try
+	{
+		form.checkSignPrivs(*this);
+		form.beSigned(*this);
 		std::cout << m_name << " signed " << form.getName() << std::endl;
-	else 
-		std::cout << m_name << " couldn't sign " << form.getName()
-			<< " because of a skill issue (grade too low)." << std::endl;
-	form.beSigned(*this);
+	}
+	catch(std::exception &e)
+	{
+		std::cout << m_name << " couldnt sign " << form.getName();
+		std::cout << " because of a skill issue (grade too low)" << std::endl;
+	}
 }
+

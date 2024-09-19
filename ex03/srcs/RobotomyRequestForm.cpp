@@ -6,7 +6,7 @@
 /*   By: dbarrene <dbarrene@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 18:05:49 by dbarrene          #+#    #+#             */
-/*   Updated: 2024/09/08 19:40:28 by dbarrene         ###   ########.fr       */
+/*   Updated: 2024/09/19 13:00:37 by dbarrene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,20 @@ RobotomyRequestForm::~RobotomyRequestForm(){
 
 void	RobotomyRequestForm::execute(Bureaucrat const& executor) const
 {
-	static int i = 0;
-	if (checkPrivs(executor))
+	if (!getSignage())
+		throw FormNotSignedException();
+	if (checkExecPrivs(executor))
 	{
+		std::srand(std::time(nullptr));
+		int random = std::rand();
 		std:: cout << "*drilling noises*" << std::endl;
-		if (i % 2)
+		if (random % 2)
 			std::cout << m_target << " has been robotomized" << std::endl;
 		else
 			std::cout << m_target << "'s robotomy has failed :( " << std::endl;
 	}
+	else
+		throw GradeTooLowException();
 }
 
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& other)

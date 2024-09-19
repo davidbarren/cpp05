@@ -6,7 +6,7 @@
 /*   By: dbarrene <dbarrene@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 23:54:33 by dbarrene          #+#    #+#             */
-/*   Updated: 2024/09/08 17:57:07 by dbarrene         ###   ########.fr       */
+/*   Updated: 2024/09/19 12:56:53 by dbarrene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef BUREAUCRAT_HPP
@@ -31,6 +31,7 @@ class Bureaucrat
 		void	incrementGrade();
 		void	decrementGrade();
 		void	signForm(AForm& form);
+		void	executeForm(AForm const& form);
 		class GradeTooHighException : public std::exception
 		{
 			const char*	what() const noexcept;

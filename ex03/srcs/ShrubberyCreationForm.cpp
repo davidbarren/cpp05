@@ -6,7 +6,7 @@
 /*   By: dbarrene <dbarrene@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 18:05:49 by dbarrene          #+#    #+#             */
-/*   Updated: 2024/09/11 14:42:37 by dbarrene         ###   ########.fr       */
+/*   Updated: 2024/09/19 13:01:58 by dbarrene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ void	ShrubberyCreationForm::execute(Bureaucrat const& executor) const
 	std::ofstream strm;
 
 	tree = "  *  \n *** \n*****\n  |  \n";
-	if (checkPrivs(executor))
+	if (!getSignage())
+		throw FormNotSignedException();
+	if (checkExecPrivs(executor))
 	{
 		strm.open(m_target + "_shrubbery");
 		if (strm.is_open())
@@ -41,6 +43,8 @@ void	ShrubberyCreationForm::execute(Bureaucrat const& executor) const
 			strm.close();
 		}
 	}
+	else
+		throw GradeTooLowException();
 }
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other)

@@ -6,7 +6,7 @@
 /*   By: dbarrene <dbarrene@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 16:42:27 by dbarrene          #+#    #+#             */
-/*   Updated: 2024/09/08 19:31:33 by dbarrene         ###   ########.fr       */
+/*   Updated: 2024/09/19 14:38:44 by dbarrene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,15 @@ int32_t AForm::getExecReq() const
 
 void	AForm::beSigned(Bureaucrat signer)
 {
-	if (signer.getGrade() < m_sign_req)
+	if (signer.getGrade() <= m_sign_req)
 		m_is_signed = true;
-	signer.signForm(*this);
-	if (!m_is_signed)
+	else
 		throw GradeTooLowException();
-
 }
 
 const char*	AForm::GradeTooHighException::what() const noexcept
 {
-	return "Forms grade is too high!";
+	return "AForm's grade is too high!";
 }
 
 const char*	AForm::GradeTooLowException::what() const noexcept
@@ -83,13 +81,18 @@ const char* AForm::FormNotSignedException::what() const noexcept
 	return "This form is not signed!";
 }
 
-bool	AForm::checkPrivs(Bureaucrat const &executor) const
+bool	AForm::checkSignPrivs(Bureaucrat const &executor) const
 {
-	if (!getSignage())
-		throw FormNotSignedException();
+	if (executor.getGrade() > m_sign_req)
+		throw GradeTooLowException();
+	return true;
+}
+
+bool	AForm::checkExecPrivs(Bureaucrat const &executor) const
+{
 	if (executor.getGrade() > m_exec_req)
-		throw Bureaucrat::GradeTooLowException();
-	return (true);
+		throw GradeTooLowException();
+	return true;
 }
 
 std::ostream& operator<<(std::ostream& str, AForm& ref)

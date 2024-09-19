@@ -6,7 +6,7 @@
 /*   By: dbarrene <dbarrene@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 23:53:45 by dbarrene          #+#    #+#             */
-/*   Updated: 2024/09/11 14:27:34 by dbarrene         ###   ########.fr       */
+/*   Updated: 2024/09/19 14:32:47 by dbarrene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,24 @@
 
 int	main(void)
 {
-	try{
-		Form testcase;
-		std::cout << testcase << std::endl;
-		Bureaucrat worker("loser", 69);
-		testcase.beSigned(worker);
-	}
-	catch(std::exception &e)
+	Form myform("myform", 42, 42);
+	try
 	{
-		std::cout << "Exception caught: " << e.what() << std::endl;
+		Form badform("trashform", 160, 42);
 	}
-	try{
-		Form myform("bestformever" , 150, 42);
-		std:: cout << myform << std::endl;
-	}
-	catch(std::exception &e)
+	catch (std::exception &e)
 	{
-		std::cout << "Exception caught: " << e.what() << std::endl;
+		std::cout << "caught exception: " << e.what() << std::endl;
 	}
+	Bureaucrat gigachad("gigachad", 3);
+	Bureaucrat loser;
+
+	std::cout << myform << std::endl;
+	std::cout << gigachad << std::endl;
+	std::cout << loser << std::endl;
+	loser.signForm(myform);
+	gigachad.signForm(myform);
+	loser = gigachad;
+	loser.signForm(myform);
+	std::cout << myform << std::endl;
 }

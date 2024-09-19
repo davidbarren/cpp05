@@ -6,7 +6,7 @@
 /*   By: dbarrene <dbarrene@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 23:53:45 by dbarrene          #+#    #+#             */
-/*   Updated: 2024/09/11 14:41:18 by dbarrene         ###   ########.fr       */
+/*   Updated: 2024/09/19 13:47:37 by dbarrene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,34 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 int	main(void)
 {
-	std::cout << "Forms and shit" << std::endl;
 	AForm *shrub = new ShrubberyCreationForm("dir");
-	std::cout << *shrub << std::endl;
 	Bureaucrat chad;
+	Bureaucrat gigachad("gigachad", 1);
 
-	 
-	std::cout << chad << std::endl;
-	shrub->beSigned(chad);
-	shrub->execute(chad);
-	std::cout << *shrub << std::endl;
+	chad.signForm(*shrub);
+	chad.executeForm(*shrub);
+	gigachad.signForm(*shrub);
+	gigachad.executeForm(*shrub);
+	delete shrub;
+
+	AForm* pardon = new PresidentialPardonForm("baboonius");
+	chad.signForm(*pardon);
+	chad.executeForm(*pardon);
+	gigachad.signForm(*pardon);
+	gigachad.executeForm(*pardon);
+	delete pardon;
+
+	AForm* robotomy = new RobotomyRequestForm("bender");
+	chad.signForm(*robotomy);
+	chad.executeForm(*robotomy);
+	gigachad.signForm(*robotomy);
+	gigachad.executeForm(*robotomy);
+	chad = gigachad;
+	chad.executeForm(*robotomy);
+	delete robotomy;
 }

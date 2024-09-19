@@ -6,7 +6,7 @@
 /*   By: dbarrene <dbarrene@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 18:05:49 by dbarrene          #+#    #+#             */
-/*   Updated: 2024/09/08 19:36:43 by dbarrene         ###   ########.fr       */
+/*   Updated: 2024/09/19 12:54:51 by dbarrene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,12 @@ PresidentialPardonForm::~PresidentialPardonForm(){
 
 void	PresidentialPardonForm::execute(Bureaucrat const& executor) const
 {
-	if (checkPrivs(executor))
+	if (!getSignage())
+		throw FormNotSignedException();
+	if (checkExecPrivs(executor))
 		std:: cout<< m_target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
+	else
+		throw GradeTooLowException();
 }
 
 PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& other)

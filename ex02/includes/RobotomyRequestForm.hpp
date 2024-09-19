@@ -6,13 +6,13 @@
 /*   By: dbarrene <dbarrene@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 17:57:45 by dbarrene          #+#    #+#             */
-/*   Updated: 2024/09/08 19:33:18 by dbarrene         ###   ########.fr       */
+/*   Updated: 2024/09/19 13:02:00 by dbarrene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef ROBOTOMYREQUESTFORM_HPP
 #define ROBOTOMYREQUESTFORM_HPP
 #include "AForm.hpp"
-
+#include <ctime>
 class	RobotomyRequestForm: public AForm
 {
 	public:

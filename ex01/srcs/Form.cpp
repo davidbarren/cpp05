@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                           :+:      :+:    :+:   */
+/*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbarrene <dbarrene@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 16:42:27 by dbarrene          #+#    #+#             */
-/*   Updated: 2024/09/09 13:31:06 by dbarrene         ###   ########.fr       */
+/*   Updated: 2024/09/19 13:51:01 by dbarrene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,28 @@ void	Form::beSigned(Bureaucrat signer)
 		m_is_signed = true;
 	else
 		throw GradeTooLowException();
-
 }
 
 const char*	Form::GradeTooHighException::what() const noexcept
 {
-	return "Forms grade is too high!";
+	return "Form's grade is too high!";
 }
 
 const char*	Form::GradeTooLowException::what() const noexcept
 {
 	return "Form's grade is too low!";
+}
+
+const char* Form::FormNotSignedException::what() const noexcept
+{
+	return "This form is not signed!";
+}
+
+bool	Form::checkSignPrivs(Bureaucrat const &executor) const
+{
+	if (executor.getGrade() > m_sign_req)
+		throw GradeTooLowException();
+	return true;
 }
 
 std::ostream& operator<<(std::ostream& str, Form& ref)
@@ -85,3 +96,4 @@ std::ostream& operator<<(std::ostream& str, Form& ref)
 	str << "Form execution requirement: " << ref.getExecReq() << std::endl;
 	return str;
 }
+

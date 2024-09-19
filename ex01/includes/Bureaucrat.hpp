@@ -6,7 +6,7 @@
 /*   By: dbarrene <dbarrene@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 23:54:33 by dbarrene          #+#    #+#             */
-/*   Updated: 2024/09/08 16:57:30 by dbarrene         ###   ########.fr       */
+/*   Updated: 2024/09/19 13:49:22 by dbarrene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef BUREAUCRAT_HPP
